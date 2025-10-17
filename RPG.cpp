@@ -87,7 +87,7 @@ void printChapter() {
     cout << "И вы решили пойти и посмотреть кто там..." << endl;
 
     waitForPress();
-    
+
 }
 
 Enemy createEnemy() {
@@ -180,6 +180,42 @@ Enemy createTempleGoblin4() {
     return goblin4;
 }
 
+Enemy createTempleTheAnchor() {
+    Enemy theanchor;
+    theanchor.name = "Библиотекарь";
+    theanchor.health = 70;
+    theanchor.attack = 13;
+    theanchor.defense = 10;
+    return theanchor;
+}
+
+Enemy createTempleJudge() {
+    Enemy judge;
+    judge.name = "Судья";
+    judge.health = 70;
+    judge.attack = 15;
+    judge.defense = 10;
+    return judge;
+}
+
+Enemy createTempleOrg1() {
+    Enemy org1;
+    org1.name = "Орг";
+    org1.health = 75;
+    org1.attack = 11;
+    org1.defense = 8;
+    return org1;
+}
+
+Enemy createTempleTheProgenitorOfAlchemy() {
+    Enemy theprogenitorofalchemy;
+    theprogenitorofalchemy.name = "Судья";
+    theprogenitorofalchemy.health = 135;
+    theprogenitorofalchemy.attack = 17;
+    theprogenitorofalchemy.defense = 13;
+    return theprogenitorofalchemy;
+}
+
 void showBattleStatus(const Character& player, const Enemy& enemy) {
     cout << "=== БОЙ ===" << endl;
     cout << player.name << ": " << player.health << "/" << player.maxHealth << " HP" << endl;
@@ -233,7 +269,7 @@ bool battle(Character& player, Enemy& enemy) {
             case 3: {
                 if (player.hasPotion) {
                     cout << "Вы использовали зелье лечения! +25 HP" << endl;
-                    player.health += 25;
+                    player.health += 45;
                     if (player.health > player.maxHealth) player.health = player.maxHealth;
                     player.hasPotion = false;
                 }
@@ -734,12 +770,12 @@ void templeTheAltar(Character& player) {
     cin >> choice;
 
     switch (choice) {
-    case 2: 
+    case 2:
         cout << "Вы решили пройти мимо. " << endl;
-        waitForPress;
+        waitForPress();
         break;
     case 1:
-        cout << "Вы решили воспользоватся алтаром" << endl;
+        cout << "Вы решили воспользоватся алтарем" << endl;
         cout << "*Алтарь полносьтю выстонавливает здорови." << endl;
         cout << "И сохранает прогрес*  " << endl;
 
@@ -751,10 +787,10 @@ void templeTheAltar(Character& player) {
         else {
             cout << "Не удалось сохранить игру!" << endl;
         }
-        
-        waitForPress;
+
+        waitForPress();
         break;
-        
+
     default:
         cout << "Неверный выбор! Попробуйте еще раз." << endl;
         waitForPress();
@@ -764,7 +800,7 @@ void templeTheAltar(Character& player) {
 
 void templeTheAltarOfficial(Character& player) {
     clearScreen();
-    cout << "Вы шли и увидели алтарь..." << endl;    
+    cout << "Вы шли и увидели алтарь..." << endl;
     cout << "1: Сохранитесь и восполните здоровия. " << endl;
     cout << "2: Пройдете мимо. " << endl;
 
@@ -774,10 +810,10 @@ void templeTheAltarOfficial(Character& player) {
     switch (choice) {
     case 2:
         cout << "Вы решили пройти мимо. " << endl;
-        waitForPress;
+        waitForPress();
         break;
     case 1:
-        cout << "Вы решили воспользоватся алтаром" << endl;
+        cout << "Вы решили воспользоватся алтарем" << endl;
 
         player.health = 125;
 
@@ -788,7 +824,7 @@ void templeTheAltarOfficial(Character& player) {
             cout << "Не удалось сохранить игру!" << endl;
         }
 
-        waitForPress;
+        waitForPress();
         break;
 
     default:
@@ -797,6 +833,73 @@ void templeTheAltarOfficial(Character& player) {
         templeTheAltarOfficial(player);
     }
 }
+
+void  findTheChestToHack(Character& player) {
+    clearScreen();
+
+    int attempt;
+    int attemptsLeft = 3;
+    bool chestOpened = false;
+
+    while (attemptsLeft > 0 && !chestOpened) {
+        cout << "У вас осталось попыток " << attemptsLeft << endl;
+        cout << "Поставьте по порадку штифы от 1-4 " << endl;
+        cout << "Подскаска **4*" << endl;
+        cin >> attempt;
+
+        if (attempt == 2143) {
+            cout << "Замок щелкает!Сундук открывается... " << endl;
+            cout << "В сундуке было (+25 HP) " << endl;
+            player.hasPotion = true;
+            chestOpened = true;
+
+        }
+        else {
+            attemptsLeft--;
+            cout << "Сундук не открылся. " << endl;
+            if (attemptsLeft > 0) {
+                cout << "Попробуйте ещё раз." << endl;
+            }
+            waitForPress();
+        }
+
+    }
+}
+
+void findRainbow(Character& player) {
+    clearScreen();
+    cout << "Цвета : Красный, зеленый, синий, желтый, фиолетовый, голубой ,оранжевый" << endl;
+    cout << "1 Красный " << endl;
+    cout << "2 зеленый " << endl;
+    cout << "3 синий " << endl;
+    cout << "4 желтый " << endl;
+    cout << "5 фиолетовый " << endl;
+    cout << "6 голубой " << endl;
+
+
+    int attempt;
+    int attemptsLeft = 100;
+    bool chestOpened = false;
+
+    while (attemptsLeft > 0 && !chestOpened) {
+        cout << "У вас осталось попыток " << attemptsLeft << endl;
+        cin >> attempt;
+
+        if (attempt == 1742635) {
+            cout << "врота открыты... " << endl;
+            chestOpened = true;
+        }
+        else {
+            attemptsLeft--;
+            cout << "....... " << endl;
+            if (attemptsLeft > 0) {
+                cout << "Попробуйте ещё раз." << endl;
+            }
+            waitForPress();
+        }
+    }
+}
+
 
 void templeEntrance(Character& player) {
     clearScreen();
@@ -1059,7 +1162,7 @@ void templeEntrance(Character& player) {
 
     if (victory) {
         cout << "После победы вы решили спрятаться чтобы вас не заметили. " << endl;
-        cout << "Спустя несколько минут вы сбежали и продолжили путь. " << endl;
+
 
         if (SaveGame(player)) {
             cout << "Игра сохранена." << endl;
@@ -1068,6 +1171,184 @@ void templeEntrance(Character& player) {
             cout << "Не удалось сохранить игру!" << endl;
         }
 
+        cout << "Спустя несколько минут вы сбежали и продолжили путь. " << endl;
+        cout << "И вы пошли дальше исследовать храм. " << endl;
+        cout << "Вы шли увидели сундук и он был на ключе вы решили его взломать.  " << endl;
+        cout << "*Вы шли увидели сундук и он был на ключе вы решили его взломать.* " << endl;
+
+        waitForPress();
+        findTheChestToHack(player);
+
+        cout << "После вы пошли дальше. " << endl;
+        cout << "Вы шли и шли и дошли до комнаты похоже на библиотекаря. " << endl;
+        cout << "Вдруг дверь закрылась и из дали вышил монстр. " << endl;
+        cout << "Вы вспомнили что вы читали про него и это библиотекарь " << endl;
+        cout << "И вы знайте что надо быть тихим и не издавать ни единого звука. " << endl;
+        cout << "Потому что он слепой " << endl;
+        cout << "Но вдруг из вашего кармана выпало кольцо и библиотекарь переключился на вас. " << endl;
+        cout << "Библиотекарь закричал и начался бой. " << endl;
+
+    }
+
+    Enemy templeTheAnchor = createTempleTheAnchor();
+    victory = battle(player, templeTheAnchor);
+
+    if (victory) {
+        cout << "После победы над библиотекарем вы пошли дальше. " << endl;
+        cout << "Но вдруг вы остановились и увидели у него книгу с названием *Словарь индельноскова языка*. " << endl;
+        cout << "Вы поняли что это язык на листке со странными символами. " << endl;
+        cout << "Вы взяли его и пошли дальше. " << endl;
+        cout << "Перед вами появилось дверь и чтобы ее открыть надо было решить загадку. " << endl;
+        cout << "На полу были плиты с цветами надо было нажать по очереди плиты с цветами как у радуги. " << endl;
+
+        waitForPress();
+        findRainbow(player);
+
+        cout << "Как только вы решили войди в дверь вы за спеной увидили альтарь " << endl;
+
+        waitForPress();
+        templeTheAltarOfficial(player);
+    }
+    if (victory) {
+        cout << "Вы прошли дальше. " << endl;
+        cout << "Вы оказались в комнате похоже на комнату суда. " << endl;
+        cout << "И вдруг из двери вышел человек похоже на судью. " << endl;
+        cout << "И начал говорить " << endl;
+        cout << "Судья: Ты готов к приговору. " << endl;
+        cout << "Вы: Что, какому? " << endl;
+        cout << "Судья: За убийства моей жены. " << endl;
+        cout << "Вы: Вы про кого? " << endl;
+        cout << "Судья: Не придуривайся мне кот все сказал. " << endl;
+        cout << "Вы: Нет уж мне рано умирать " << endl;
+        cout << "Судья: Ну ты сам так решил " << endl;
+        cout << "Вы приготовились к бою. " << endl;
+
+        waitForPress();
+    }
+
+    Enemy templeJudge = createTempleJudge();
+    victory = battle(player, templeJudge);
+
+    if (victory) {
+        cout << "После победы на его столе вы забрали листок странными символами  цифрой 5 " << endl;
+        cout << "Вы пошли за стол и начали входить в дверь как из стола выпрыгнул кот, " << endl;
+        cout << "но одним ловким движением вы ее убили и пошли дальше. " << endl;
+        cout << "Вы вышли на поле и решили передохнуть. " << endl;
+        cout << "Глава закончилось. " << endl;
+        cout << "Начало новый главы… " << endl;
+
+        waitForPress();
+    }
+
+    if (victory) {
+        cout << " --- Глава 3: Мечта исполнена  ---" << endl;
+        cout << "После небольшого сна вы решили прочитать что написано на листочках. " << endl;
+        cout << "На них было написано  чтобы убрать алхимию навсегда нужно… " << endl;
+        cout << "убить человека по имени Геральд в деревни Крюковая горка он работает кузнецом… " << endl;
+        cout << "после принесите его в этот храм и положите на судейский стол и дате кровь… " << endl;
+        cout << "кто не имеет алхимить и пройзните. " << endl;
+        cout << "By the silent stone and the dormant flame,By the truth of names, now stripped of claim,I sever the thread, I break the chain,Where essence mingled, let void remain!Let theory shatter, let practice cease,I decree the Annulment of the Golden Law!No more shall elements be bound by mortal hand,And Alchemy be scoured from the land!" << endl;
+        cout << "После все сработает. " << endl;
+
+        waitForPress();
+
+        cout << "Вы: А это хорошая идея кровь есть, остался только какое то старик все легко. " << endl;
+        cout << "Вы затеяли  план нападения и пошли к деревни Крюковая горка. " << endl;
+        cout << "Вы шли и представляли как вы больше не изгой и мечтали стать хорошим мечником. " << endl;
+        cout << "Вы шли и ничего не было удивительно, но вдруг вы нашли зелье лечение (+45ХР) " << endl;
+        player.hasPotion = true;
+        cout << "И пошли дальше… " << endl;
+        cout << "Вы шли и шли пока не увидели орга, но вместо того чтобы пройти мимо вы решили убить его. " << endl;
+        cout << "Вы приготовились к бою. " << endl;
+
+        waitForPress();
+    }
+
+    Enemy templeOrg1 = createTempleOrg1();
+    victory = battle(player, templeOrg1);
+
+    if (victory) {
+        cout << "После победы вы почувствовали возбуждение и вам это нравится. " << endl;
+        cout << "Вы продолжи путь… " << endl;
+        cout << "И вот вы пришли к деревне и вы решили притвориться что вы обычный человек путешественник." << endl;
+        cout << "И вы вошли в деревне и вас приветствовал незнакомец. " << endl;
+        cout << "Незнакомец: Привет, ты путешественник? " << endl;
+        cout << "Вы: Да я путешественник, а не подскажете где у вас кузнец Геральд. " << endl;
+        cout << "Незнакомец: Да вон в той кузнице не пропустите. " << endl;
+        cout << "Вы: Спасибо. " << endl;
+        cout << "Вы пошли пошли дальше и тихонько посмеялись. " << endl;
+        cout << "И вот вы дошли до кузнице и вас любезно встретил Геральд и вы начали с разговора " << endl;
+        cout << "Геральд: Здравствуйте чего  желайте ? " << endl;
+        cout << "Вы: Да так просто посмотреть что вы тут делайте. " << endl;
+        cout << "Геральд: Мы тут делает хорошие мечи из алхимии. " << endl;
+        cout << "Вы: А можете показать? " << endl;
+        cout << "Геральт: Да сейчас. " << endl;
+        cout << "И вы атаковали его со спины не подтвердив важные органы. " << endl;
+        cout << "И только как вы собирались уходить вдруг кто-то крикнул. " << endl;
+        cout << "Незнакомец: Что ты  там делаешь! " << endl;
+        cout << "Вы: А это тебя еба… не должно. " << endl;
+        cout << "Незнакомец: Что вы сказали!?! " << endl;
+        cout << "Вы: Ой все сдохни. " << endl;
+        cout << "Незнакомец: Что… " << endl;
+        cout << "Вы с помощью меча прорезали  горла и пошли дальше, но потом решили вырезать всю деревню. " << endl;
+        cout << "После пару минут вы радостные пошли дальше… " << endl;
+        cout << "Но наступила ночь и вы решили пойти в дом и передохнуть. " << endl;
+
+        waitForPress();
+
+        if (SaveGame(player)) {
+            cout << "Игра сохранена." << endl;
+        }
+        else {
+            cout << "Не удалось сохранить игру!" << endl;
+        }
+    }
+    if (victory) {
+        cout << "После сна вы пошли дальше к храму… " << endl;
+        cout << "Вы шли и никого не боялись. " << endl;
+        cout << "Вы увидели орга и убили его со одного урона  пошли дальше и так за одним оргом вы дошли до храма… " << endl;
+        cout << "Перед обрадом вы решили воспоьзоватся альтарем. " << endl;
+
+        waitForPress();
+        templeTheAltarOfficial(player);
+
+
+        cout << "После вы  положили труп Герольда на стол, порезала себе палец и дали кровь и начали читать обряд. " << endl;
+        cout << "Вы: By the silent stone and the dormant flame " << endl;
+        cout << "Вы: By the truth of names, now stripped of claim, I sever the thread, I break the chain, " << endl;
+        cout << "Вы:Where essence mingled, let void remain! Let theory shatter, let practice cease, " << endl;
+        cout << "Вы: I decree the Annulment of the Golden Law! " << endl;
+        cout << "Вы: No more shall elements be bound by mortal hand, And Alchemy be scoured from the land! " << endl;
+
+        waitForPress();
+
+        cout << "И Вдруг появился Прародитель алхимии и он начал говорить. " << endl;
+        cout << "Прародитель алхимии : И чего ты хочешь сын мой. " << endl;
+        cout << "Вы: Я хочу убить тебя за алхимию за то что ты сделал меня изгоем за все что ты сделал , ты должен сдохнуть  раз и навсегда! " << endl;
+        cout << "Прародитель алхимии :  НУ ПОПРОБУЙ СУКИН СЫН!! " << endl;
+
+        waitForPress();
+    }
+
+    Enemy templeTheProgenitorOfAlchemy = createTempleTheProgenitorOfAlchemy();
+    victory = battle(player, templeTheProgenitorOfAlchemy);
+
+    if (victory) {
+        cout << "После победы над Прародитель алхимии  вы пошли в свою деревню… " << endl;
+        cout << "Вы шли и радовались, но как только дошли до своей деревни вы впали в ужас. " << endl;
+        cout << "На деревню напали какие люди из правительства и вы услышали крик своего девушки… " << endl;
+        cout << "Дед: Не надо я не знаю где" << player.name << "он прекратите ааааааа." << endl;
+        cout << "НО вдруг вас кто-то увидел и начал кричать что вы тут. " << endl;
+        cout << "И вы тут же убежали вдаль и решили спрятаться в храме. " << endl;
+        cout << "И вы понели что кто-то сказал что вы убили прародителя алхимии, " << endl;
+        cout << "И вы решили посмотреть до сих пор ли лишить труп кошки. " << endl;
+        cout << "И вы увидели что кошки там нету и вы поняли что она себя подменила. " << endl;
+        cout << "И вы решили некоторое время спрятаться тут. " << endl;
+
+        waitForPress();
+
+        cout << "Игра пройдена. " << endl;
+        cout << "Спасибо что сыграли в игру. " << endl;
     }
 }
 
